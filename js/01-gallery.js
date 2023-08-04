@@ -22,22 +22,26 @@ const item = galleryItems.map((  {preview, original, description} ) => `
   `).join("")
 galaryList.insertAdjacentHTML("beforeend", item)
 
+let modalInstance;
+function createFullPicture(evt) {
+if(evt.target !== evt.currentTarget) { 
+  evt.preventDefault();
 
-function createFullPicture(evt) {         
-      if (evt.currentTarget !== evt.target) {  
-        evt.preventDefault();
-document.addEventListener("keydown", checkKey); 
-function checkKey(event) {console.log(event.code);
-            if(event.code === "Esc") {return true} else return}}   
-const eventPicture = evt.target;
-console.dir(eventPicture);
-const instance = basicLightbox.create(`
-       <img src="${eventPicture.dataset.source}" alt="${eventPicture.description}">;
-       {onShow: (instance) => {imstnce.show()},
-       onClose: (instance) =>{(function checkKey(event)){instance.close(), instance.element().remuveEventListener("keydown", checkKey())},
-       `);
-       //instance.show()
-}
+    evt.target.src = evt.target.dataset.source;
+    console.log(evt.target.src);
+    modalInstance = basicLightbox.create(`
+      <img src='${evt.target.src}' width="800" height="600">
+    `);
+    modalInstance.show();
+    window.addEventListener('keydown', closeModal);
+  }
+  function closeModal(event) {
+    if (event.key === 'Escape' && modalInstance) {
+      modalInstance.close();
+      document.removeEventListener('keydown', closeModal)
+    }
+  }}
+// 
 
 
 //    }
