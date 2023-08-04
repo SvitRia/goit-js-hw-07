@@ -25,14 +25,20 @@ galaryList.insertAdjacentHTML("beforeend", item)
 
 function createFullPicture(evt) {         
       if (evt.currentTarget !== evt.target) {  
-        evt.preventDefault();    
+        evt.preventDefault();
+document.addEventListener("keydown", checkKey); 
+function checkKey(event) {console.log(event.code);
+            if(event.code === "Esc") {return true} else return}}   
 const eventPicture = evt.target;
 console.dir(eventPicture);
 const instance = basicLightbox.create(`
-       <img src="${eventPicture.dataset.source}">`);
-       instance.show()
+       <img src="${eventPicture.dataset.source}" alt="${eventPicture.description}">;
+       {onShow: (instance) => {imstnce.show()},
+       onClose: (instance) =>{(function checkKey(event)){instance.close(), instance.element().remuveEventListener("keydown", checkKey())},
+       `);
+       //instance.show()
 }
-}
+
 
 //    }
 //    console.dir(createFullPicture());
