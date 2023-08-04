@@ -24,25 +24,28 @@ galaryList.insertAdjacentHTML("beforeend", item)
 
 let modalInstance;
 function createFullPicture(evt) {
-if(evt.target !== evt.currentTarget) { 
-  evt.preventDefault();
-
+    
+    if(evt.target !== evt.currentTarget) { 
+        evt.preventDefault();
+        window.addEventListener('keydown', closeModal);
     evt.target.src = evt.target.dataset.source;
-    console.log(evt.target.src);
-    modalInstance = basicLightbox.create(`
-      <img src='${evt.target.src}' width="800" height="600">
-    `);
-    modalInstance.show();
-    window.addEventListener('keydown', closeModal);
+    modalInstance = basicLightbox.create(`<img src='${evt.target.src}' width="800" height="600">`,
+    {onShow: (modalInstance) => {console.log('onShow', modalInstance)},
+    onClose: (modalInstance) => {modalInstance.visible()},
+    closable: false}
+    );
+    
+    modalInstance.show(modalInstance) 
+    //modalInstance.element.onShow;
+    function closeModal(event) {
+        if (event.key === 'Escape' && modalInstance) {
+          modalInstance.close();
+          window.removeEventListener('keydown', closeModal)
+        }
   }
-  function closeModal(event) {
-    if (event.key === 'Escape' && modalInstance) {
-      modalInstance.close();
-      document.removeEventListener('keydown', closeModal)
-    }
   }}
 // 
-
+console.dir(createFullPicture());
 
 //    }
 //    console.dir(createFullPicture());
