@@ -11,7 +11,7 @@ import { galleryItems } from './gallery-items.js'
 
 const galaryList = document.querySelector(".gallery")
 galaryList.addEventListener("click", createFullPicture)
-document.addEventListener("keydown", createFullPicture)
+
 
 const item = galleryItems.map((  {preview, original, description} ) => `
   <li class="gallery__item">
@@ -20,38 +20,36 @@ const item = galleryItems.map((  {preview, original, description} ) => `
 </a>
 </li>
   `).join("")
-
 galaryList.insertAdjacentHTML("beforeend", item)
 
-//const isEscape = false;
+
+function createFullPicture(evt) {         
+      if (evt.currentTarget !== evt.target) {  
+        evt.preventDefault();    
+const eventPicture = evt.target;
+console.dir(eventPicture);
+const instance = basicLightbox.create(`
+       <img src="${eventPicture.dataset.source}">`);
+       instance.show()
+}
+}
+
+//    }
+//    console.dir(createFullPicture());
+//    onShow: (instance) => {imstnce.show(); 
+    
+//     onClose: (instance) => { {instance.close(); instance.element().remuveEventListener("keydown", checkKey())}}
+//     document.addEventListener("keydown", checkKey());
+//     function checkKey(event) {if(event.code === "Esc") {return true} else return}
+//        console.dir(checkKey());
+//    console.dir(instance);
+   //instance.addEventListener("keydown", evt => { if(evt.code === "Escape") {instance.close()}})
+   //const isEscape = false;
 // function takePuschKey(evt) {let isEscape = false;
 //     	if (evt.key === "Escape" || evt.key === "Esc" ||  evt.keyCode === 27 || basicLightbox.visible() === true) {
 //     instance.close(); }}
 // console.log(isEscape);
-
-
-function createFullPicture(evt) {         
-    evt.preventDefault()  
-    if (evt.currentTarget !== evt.target) {     
-const eventPicture = evt.target;
-const instance = basicLightbox.create(`
-   <div class="modal">
-       <img src="${eventPicture.dataset.source}"      
-       <p>Для виходу натисніть клавішу "Esc"></p>
-   </div>, 
-   {
-    onShow: (instance) => {imstnce.show()},
-    
-    onClose: (instance) => { if(evt.code === "Esc" && instance.basicLightbox.visible() === true) {instance.close();instance.element().remuveEventListener ()}}
- `)
-
-instance.show();}
-
-//instance.addEventListener("keydown", evt => { if(evt.code === "Escape") {instance.close()}})
-
-   }
-   console.dir(createFullPicture());
-  ;
+  
 //    {
 //     onShow: (instance) => {imstnce.show()},
 
@@ -78,4 +76,4 @@ instance.show();}
 // 			instance.close();
 // 		}
 // 	};
-// },
+// }
