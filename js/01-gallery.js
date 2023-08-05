@@ -24,34 +24,25 @@ galaryList.insertAdjacentHTML("beforeend", item)
 
 let modalInstance;
 function createFullPicture(evt) {
-    
-    if(evt.target !== evt.currentTarget) { 
-        evt.preventDefault();
-        window.addEventListener('keydown', closeModal);
+    evt.preventDefault();
+    if(evt.target === evt.currentTarget) { return} else {   
     evt.target.src = evt.target.dataset.source;
     modalInstance = basicLightbox.create(`<img src='${evt.target.src}' width="800" height="600">`,
-    {onShow: (modalInstance) => {console.log('onShow', modalInstance)},
-    onClose: (modalInstance) => {modalInstance.visible()},
-    closable: false}
+    {onShow: (modalInstance) => {window.addEventListener('keydown', closeModal)},
+    onClose: (modalInstance) => {window.removeEventListener('keydown', closeModal)},
+    }
     );
     
-    modalInstance.show(modalInstance) 
+    modalInstance.show() 
     //modalInstance.element.onShow;
     function closeModal(event) {
         if (event.key === 'Escape' && modalInstance) {
           modalInstance.close();
-          window.removeEventListener('keydown', closeModal)
         }
   }
   }}
-// 
-console.dir(createFullPicture());
 
-//    }
-//    console.dir(createFullPicture());
-//    onShow: (instance) => {imstnce.show(); 
-    
-//     onClose: (instance) => { {instance.close(); instance.element().remuveEventListener("keydown", checkKey())}}
+
 //     document.addEventListener("keydown", checkKey());
 //     function checkKey(event) {if(event.code === "Esc") {return true} else return}
 //        console.dir(checkKey());

@@ -24,12 +24,5 @@ const item = galleryItems.map((  {preview, original, description} ) => `
   `).join("")
 
 galaryList.insertAdjacentHTML("beforeend", item)
-galaryList.addEventListener("click", setSlideList)
-function setSlideList(evt) {
-    evt.preventDefault()
+
 let gallery = new SimpleLightbox('.gallery a', {captionDelay: 250, captionsData: "alt", overlayOpacity: 0.5});
-gallery.on('show.simplelightbox', function () {` 
-	<div class="gallery">
-    <a href = "galaryList.original"><img src="${galaryList.preview}" alt="${galaryList.description}"></a>
-  </div>`});
-};
