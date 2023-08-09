@@ -43,10 +43,7 @@ function createFullPicture(evt) {
   }}
 
 
-//     document.addEventListener("keydown", checkKey());
-//     function checkKey(event) {if(event.code === "Esc") {return true} else return}
-//        console.dir(checkKey());
-//    console.dir(instance);
+//
    //instance.addEventListener("keydown", evt => { if(evt.code === "Escape") {instance.close()}})
    //const isEscape = false;
 // function takePuschKey(evt) {let isEscape = false;
@@ -80,4 +77,4 @@ function createFullPicture(evt) {
 // 			instance.close();
 // 		}
 // 	};
-// }
+
